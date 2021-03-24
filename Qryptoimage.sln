@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qryptoimage", "Qryptoimage\Qryptoimage.csproj", "{8B8AE1D5-4125-4AC8-8A7C-6F3B4630826C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qryptoimage.App", "Qryptoimage.App\Qryptoimage.App.csproj", "{8B8AE1D5-4125-4AC8-8A7C-6F3B4630826C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qryptoimage.Tests", "Qryptoimage.Tests\Qryptoimage.Tests.csproj", "{880FC044-EA60-4142-A687-A099318FB869}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qryptoimage", "Qryptoimage\Qryptoimage.csproj", "{A068FDAB-4A31-4753-841A-C75274B7C4F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +34,29 @@ Global
 		{8B8AE1D5-4125-4AC8-8A7C-6F3B4630826C}.Release|x64.Build.0 = Release|Any CPU
 		{8B8AE1D5-4125-4AC8-8A7C-6F3B4630826C}.Release|x86.ActiveCfg = Release|Any CPU
 		{8B8AE1D5-4125-4AC8-8A7C-6F3B4630826C}.Release|x86.Build.0 = Release|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Debug|x64.Build.0 = Debug|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Debug|x86.Build.0 = Debug|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Release|x64.ActiveCfg = Release|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Release|x64.Build.0 = Release|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Release|x86.ActiveCfg = Release|Any CPU
+		{880FC044-EA60-4142-A687-A099318FB869}.Release|x86.Build.0 = Release|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Debug|x64.Build.0 = Debug|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Debug|x86.Build.0 = Debug|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Release|x64.Build.0 = Release|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{A068FDAB-4A31-4753-841A-C75274B7C4F8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
