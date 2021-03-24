@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using NUnit.Framework;
 
 namespace Qryptoimage.Tests
@@ -16,6 +17,18 @@ namespace Qryptoimage.Tests
             var decrypted = Crypter.Decrypt(encrypted, key);
             
             Assert.AreEqual(text, decrypted);
+        }
+        
+        [Test]
+        public void Encode_and_decode_text_to_bitmap()
+        {
+            var text = "Some text that i want to pass through";
+            var bitmap = new Bitmap(50, 50);
+            
+            LSB.Encode(bitmap, text);
+            var decoded = LSB.Decode(bitmap);
+            
+            Assert.AreEqual(text, decoded);
         }
     }
 }

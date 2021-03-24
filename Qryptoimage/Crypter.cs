@@ -1,7 +1,6 @@
 ﻿using System;  
 using System.IO;  
-using System.Security.Cryptography;  
-using System.Text;  
+using System.Security.Cryptography;
 
 namespace Qryptoimage
 {

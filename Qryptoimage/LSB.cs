@@ -1,78 +1,94 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 
 namespace Qryptoimage
 {
     public static class LSB
     {
-        public static string Decode(Bitmap bitmap)
+        private class BitmapIndexDecorator : IEnumerable<byte>
         {
-            var bytes = new List<byte>();
-            byte value = 0;
-            var counter = 0;
-            for (int i = 0; i < bitmap.Width; i++)
+            private Bitmap bitmap;
+
+            public BitmapIndexDecorator(Bitmap bitmap)
             {
-                for (int j = 0; j < bitmap.Height; j++)
+                this.bitmap = bitmap;
+            }
+
+            public Color this[int index]
+            {
+                get
                 {
-                    var color = bitmap.GetPixel(i, j);
+                    var x = index % bitmap.Width;
+                    var y = index / bitmap.Width;
+
+                    return bitmap.GetPixel(x, y);
+                }
+                set
+                {
+                    var x = index % bitmap.Width;
+                    var y = index / bitmap.Width;
                     
-                    byte n = color.R % 2 == 0 ? (byte) 0 : (byte) 1;
-                    value |= (byte)(n << 7-counter);
-                    counter++;
-                    
-                    if (counter == 8)
-                    {
-                        bytes.Add(value);
-                        value = 0;
-                        counter = 0;
-                    }
+                    bitmap.SetPixel(x, y, value);
                 }
             }
+
+            public IEnumerator<byte> GetEnumerator()
+            {
+                var counter = 0;
+                while (counter < (bitmap.Width * bitmap.Height) - 8)
+                {
+                    byte value = 0;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        var color = this[counter];
+                        counter++;
+                        
+                        var n = color.R % 2 == 0 ? (byte) 0 : (byte) 1;
+                        value |= (byte)(n << i);
+                    }
+                    
+                    if (value == 0)
+                        yield break;
+
+                    yield return value;
+                }
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+        public static string Decode(Bitmap bitmap)
+        {
+            var bytes = new BitmapIndexDecorator(bitmap).ToArray();
 
             return Encoding.UTF8.GetString(bytes.ToArray());
         }
 
         public static void Encode(Bitmap bitmap, string text)
         {
-            var bytes = Encoding.UTF8.GetBytes(text);
-            var charCounter = 0;
-            var byteCounter = 0;
+            var bytes = new BitArray(Encoding.UTF8.GetBytes(text));
+
+            var counter = 0;
             
-            for (int i = 0; i < bitmap.Width; i++) // lable
+            var decorator = new BitmapIndexDecorator(bitmap);
+            foreach (bool b in bytes)
             {
-                for (int j = 0; j < bitmap.Height; j++)
-                {
-                    var color = bitmap.GetPixel(i, j);
-
-                    if (byteCounter == 8)
-                    {
-                        byteCounter = 0;
-                        charCounter++;
-                    }
-                    else
-                    {
-                        byteCounter++;
-                    }
-                    
-                    if (charCounter >= bytes.Length)
-                        return;
-
-                    var bb = bytes[charCounter];
-                    var b = (bb & (1 << byteCounter-1));
-                    var red = (int) color.R;
-                    if (color.R % 2 == 0 && b == 1)
-                    {
-                        red = color.R + 1;
-                    }
-                    else if (color.R % 2 == 1 && b == 0)
-                    {
-                        red = color.R - 1;
-                    }
-                    
-                    bitmap.SetPixel(i, j, Color.FromArgb(color.A, red, color.G, color.B));
-                }
+                var color = decorator[counter];
+                
+                var red = (int) color.R;
+                if (color.R % 2 == 0 && b)
+                    red = color.R + 1;
+                else if (color.R % 2 == 1 && !b) 
+                    red = color.R - 1;
+                
+                decorator[counter] = Color.FromArgb(color.A, red, color.G, color.B);
+                
+                counter++;
             }
         }
     }
