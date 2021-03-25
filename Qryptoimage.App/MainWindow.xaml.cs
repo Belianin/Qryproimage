@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using Brushes = System.Windows.Media.Brushes;
 using Image = System.Drawing.Image;
 
 namespace Qryptoimage
@@ -33,6 +34,17 @@ namespace Qryptoimage
             {
                 bitmap = (Bitmap) Image.FromFile(openFileDialog.FileName);
                 MainImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+
+                if (LSB.CheckWatermark(bitmap))
+                {
+                    WatermarkLabel.Content = "Image has encrypted text*";
+                    WatermarkLabel.Foreground = Brushes.Teal;
+                }
+                else
+                {
+                    WatermarkLabel.Content = "Image has no encrypted text";
+                    WatermarkLabel.Foreground = Brushes.DarkOrange;
+                }
             }
         }
 
@@ -67,6 +79,7 @@ namespace Qryptoimage
         private void Encrypt(object sender, RoutedEventArgs e)
         {
             LSB.Encode(bitmap, TextInput.Text);
+            LSB.SetWatermark(bitmap);
             MainImage.Source = Convert(bitmap);
 
             return;

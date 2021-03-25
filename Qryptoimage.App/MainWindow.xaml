@@ -29,6 +29,11 @@
             Height="24"
             Name="OpenFileButton"
             Click="OpenFileButton_Click">Open file</Button>
+        <Label
+            Canvas.Top="376"
+            Canvas.Left="436"
+            Height="24"
+            Name="WatermarkLabel"></Label>
         <Label Canvas.Left="80" Canvas.Top="410">Enter UUID key</Label>
         <TextBox 
             Canvas.Left="180" Canvas.Top="410"

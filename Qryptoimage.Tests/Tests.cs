@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Text;
 using NUnit.Framework;
 
 namespace Qryptoimage.Tests
@@ -29,6 +30,15 @@ namespace Qryptoimage.Tests
             var decoded = LSB.Decode(bitmap);
             
             Assert.AreEqual(text, decoded);
+        }
+
+        [Test]
+        public void METHOD()
+        {
+            foreach (var b in Encoding.UTF8.GetBytes("\uF63F"))
+            {
+                Console.WriteLine(b);
+            }
         }
     }
 }
