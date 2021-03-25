@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Qryptoimage
         public static bool CheckWatermark(Bitmap bitmap)
         {
             var bytes = new BitmapIndexDecorator(bitmap, c => c.B)
-                .Take(Watermaker.Length)
+                .Take(Encoding.UTF8.GetBytes(Watermaker).Length)
                 .ToArray();
 
             return Encoding.UTF8.GetString(bytes).Equals(Watermaker);

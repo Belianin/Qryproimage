@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -43,7 +44,7 @@ namespace Qryptoimage
                 else
                 {
                     WatermarkLabel.Content = "Image has no encrypted text";
-                    WatermarkLabel.Foreground = Brushes.DarkOrange;
+                    WatermarkLabel.Foreground = Brushes.OrangeRed;
                 }
             }
         }
@@ -115,6 +116,13 @@ namespace Qryptoimage
             //     Console.WriteLine(exception);
             //     throw;
             // }
+        }
+
+        private void SaveFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if(saveFileDialog.ShowDialog() == true)
+                bitmap.Save(saveFileDialog.FileName, ImageFormat.Png);
         }
     }
 }

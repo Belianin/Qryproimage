@@ -33,12 +33,12 @@ namespace Qryptoimage.Tests
         }
 
         [Test]
-        public void METHOD()
+        public void Set_and_check_watermark()
         {
-            foreach (var b in Encoding.UTF8.GetBytes("\uF63F"))
-            {
-                Console.WriteLine(b);
-            }
+            var bitmap = new Bitmap(50, 50);
+            
+            LSB.SetWatermark(bitmap);
+            Assert.True(LSB.CheckWatermark(bitmap));
         }
     }
 }
