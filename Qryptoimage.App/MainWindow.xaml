@@ -5,73 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Qryptoimage"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize">
-    <Canvas>
+        Title="Qryptoimage" Height="600" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="256"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
         <Border 
             Background="LightGray"
             BorderBrush="Gray"
             BorderThickness="1" 
-            Height="360"
-            Width="640"
-            Canvas.Top="8"
-            Canvas.Left="80">
+            Height="600"
+            Width="600"
+            Grid.Row="0"
+            Grid.Column="1">
             <Image 
                 Name="MainImage"
-                MaxHeight="360"
-                MaxWidth="640"
+                MaxHeight="600"
+                MaxWidth="600"
                 Stretch="Uniform"
-                ></Image>
+            ></Image>
         </Border>
-        <Button
-            Canvas.Top="376"
-            Canvas.Left="336"
-            Width="128"
-            Height="24"
-            Name="OpenFileButton"
-            Click="OpenFileButton_Click">Open</Button>
-        <Label
-            Canvas.Top="376"
-            Canvas.Left="436"
-            Height="24"
-            Name="WatermarkLabel"></Label>
-        <Button
-            Canvas.Top="376"
-            Canvas.Right="60"
-            Width="96"
-            Height="24"
-            Name="SaveFileButton"
-            Click="SaveFileButton_Click">Save</Button>
-        <Label Canvas.Left="80" Canvas.Top="410">Enter UUID key</Label>
-        <TextBox 
-            Canvas.Left="180" Canvas.Top="410"
-            Width="256"
-            Height="28"
-            Name="KeyInput" ></TextBox>
-        <Label Canvas.Left="450" Canvas.Top="410">or</Label>
-        <Button 
-            Canvas.Left="500" Canvas.Top="410"
-            Width="64"
-            Height="28"
-            Click="GenerateKey" >Generate</Button>
-        <Button
-            Canvas.Top="448"
-            Canvas.Left="300"
-            Width="80"
-            Height="24"
-            Name="EncryptButton"
-            Click="Encrypt">Encrypt</Button>
-        <Button
-            Canvas.Top="448"
-            Canvas.Right="300"
-            Width="80"
-            Height="24"
-            Name="DecryptButton"
-            Click="Decrypt">Decrypt</Button>
-        <TextBox 
-            Canvas.Top="480"
-            Canvas.Left="80"
-            Width="680"
-            Height="80"
-            Name="TextInput"></TextBox>
-    </Canvas>
+        
+        <DockPanel Grid.Row="0" Grid.Column="0" Height="600" LastChildFill="True">
+            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Orientation="Vertical">
+                <Button
+                    Margin="4 4 4 4"
+                    Width="64"
+                    Height="24"
+                    Click="OpenFileButton_Click">Open</Button>
+                <Label
+                    Margin="4 4 4 4">
+                    <TextBlock TextDecorations="Underline" Name="WatermarkLabel">No image selected</TextBlock>
+                </Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Height="80">
+                <Button
+                    Margin="4 4 4 4"
+                    Width="64"
+                    Height="24"
+                    Click="SaveFileButton_Click">Save</Button>
+            </StackPanel>
+            <StackPanel
+                VerticalAlignment="Center"
+                Margin="4 4 4 4"
+                HorizontalAlignment="Center">
+                <DockPanel 
+                    Width="256">
+                    <Label DockPanel.Dock="Left">Enter UUID key or</Label>
+                    <Button
+                        DockPanel.Dock="Right"
+                        Margin="4 4 4 4"
+                        Width="80"
+                        Height="22"
+                        Click="GenerateKey" >Generate</Button>
+                </DockPanel>
+                <TextBox 
+                    Margin="4 4 4 4"
+                    Width="224"
+                    Height="28"
+                    Name="KeyInput" ></TextBox>
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        Margin="4 4 4 4"
+                        Width="80"
+                        Height="24"
+                        Name="EncryptButton"
+                        Click="Encrypt">Encrypt</Button>
+                    <Button
+                        Margin="4 4 4 4"
+                        Width="80"
+                        Height="24"
+                        Name="DecryptButton"
+                        Click="Decrypt">Decrypt</Button>
+                </StackPanel>
+                <Label Name="StatusLabel">Status</Label>
+                <TextBox
+                    Width="224"
+                    Height="128"
+                    Name="TextInput"></TextBox>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
 </Window>

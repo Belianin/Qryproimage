@@ -38,13 +38,13 @@ namespace Qryptoimage
 
                 if (LSB.CheckWatermark(bitmap))
                 {
-                    WatermarkLabel.Content = "Image may has encrypted text*";
-                    WatermarkLabel.Foreground = Brushes.Teal;
+                    //WatermarkLabel.Text = "Image may has encrypted text";
+                    WatermarkLabel.Foreground = Brushes.DarkGreen;
                 }
                 else
                 {
-                    WatermarkLabel.Content = "Image has no encrypted text";
-                    WatermarkLabel.Foreground = Brushes.OrangeRed;
+                    WatermarkLabel.Text = "Image has no encrypted text";
+                    //WatermarkLabel.Foreground = Brushes.DarkOrange;
                 }
             }
         }
