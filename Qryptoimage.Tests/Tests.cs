@@ -20,6 +20,18 @@ namespace Qryptoimage.Tests
         }
         
         [Test]
+        public void Encrypt_and_decrypt_non_ascii_text()
+        {
+            var text = "Привет мир!😀";
+            var key = Guid.NewGuid();
+
+            var encrypted = Crypter.Encrypt(text, key);
+            var decrypted = Crypter.Decrypt(encrypted, key);
+            
+            Assert.AreEqual(text, decrypted);
+        }
+        
+        [Test]
         public void Encode_and_decode_text_to_bitmap()
         {
             var text = "Some text that i want to pass through";
@@ -38,6 +50,22 @@ namespace Qryptoimage.Tests
             
             LSB.SetWatermark(bitmap);
             Assert.True(LSB.CheckWatermark(bitmap));
+        }
+
+        [Test]
+        public void All_together_now()
+        {
+            var text = "Some text that i want to pass through";
+            var key = Guid.NewGuid();
+            var bitmap = new Bitmap(50, 50);
+
+            var encrypted = Crypter.Encrypt(text, key);
+            
+            LSB.Encode(bitmap, encrypted);
+            var decoded = LSB.Decode(bitmap);
+            var decrypted = Crypter.Decrypt(decoded, key);
+            
+            Assert.AreEqual(text, decrypted);
         }
     }
 }

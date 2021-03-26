@@ -50,11 +50,9 @@ namespace Qryptoimage.App
 
         private void Decrypt(object sender, RoutedEventArgs routedEventArgs)
         {
-            
-            if (bitmap != null)
-            {
-                TextInput.Text = LSB.Decode(bitmap);
-            }
+
+            var x = LSB.Decode(bitmap);
+            TextInput.Text = x;
             //var text = Crypter.Encrypt("hello", Guid.Parse("7ab9bc21-227c-4207-86bc-32f6e95388fe"));
 
             //TextInput.Text = Crypter.Decrypt(text, Guid.Parse("7ab9bc21-227c-4207-86bc-32f6e95388fe")); //7ab9bc21-227c-4207-86bc-32f6e95388fe
@@ -81,7 +79,7 @@ namespace Qryptoimage.App
         {
             if (string.IsNullOrWhiteSpace(KeyInput.Text))
             {
-                Encode(KeyInput.Text);
+                Encode(TextInput.Text);
                 
                 StatusLabel.Content = "Encrypted without key";
             }
