@@ -17,6 +17,8 @@ namespace Qryptoimage.App
     {
         private Bitmap bitmap;
         
+        private const string FileFilter = "Image Files|*.bmp;*.png;*.jpg)";
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +30,7 @@ namespace Qryptoimage.App
             {
                 CheckFileExists = true,
                 CheckPathExists = true,
-                Filter = "Image Files|*.bmp;*.png;*.jpg)"
+                Filter = FileFilter
             };
             
             if (openFileDialog.ShowDialog() == true)
@@ -36,21 +38,19 @@ namespace Qryptoimage.App
                 bitmap = (Bitmap) Image.FromFile(openFileDialog.FileName);
                 MainImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
 
-                if (LSB.CheckWatermark(bitmap))
-                {
-                    //WatermarkLabel.Text = "Image may has encrypted text";
-                    WatermarkLabel.Foreground = Brushes.DarkGreen;
-                }
-                else
-                {
-                    WatermarkLabel.Text = "Image has no encrypted text";
-                    //WatermarkLabel.Foreground = Brushes.DarkOrange;
-                }
+                WatermarkLabel.Text = LSB.CheckWatermark(bitmap) 
+                    ? "✔ Image may has encrypted text"
+                    : "❌ Image has no encrypted text";
+
+                EncryptButton.IsEnabled = true;
+                DecryptButton.IsEnabled = true;
+                SaveButton.IsEnabled = false;
             }
         }
 
         private void Decrypt(object sender, RoutedEventArgs routedEventArgs)
         {
+            
             if (bitmap != null)
             {
                 TextInput.Text = LSB.Decode(bitmap);
@@ -79,48 +79,41 @@ namespace Qryptoimage.App
 
         private void Encrypt(object sender, RoutedEventArgs e)
         {
-            LSB.Encode(bitmap, TextInput.Text);
-            LSB.SetWatermark(bitmap);
-            MainImage.Source = Convert(bitmap);
-
-            return;
-            
-            
-            if (MainImage.Source == null)
-            {
-                MessageBox.Show("No image selected");
-                return;
-            }
-            
             if (string.IsNullOrWhiteSpace(KeyInput.Text))
             {
-                MessageBox.Show("Empty key");
-                return;
+                Encode(KeyInput.Text);
+                
+                StatusLabel.Content = "Encrypted without key";
             }
-
-            if (!Guid.TryParse(KeyInput.Text.Trim(), out var guid))
+            else if (Guid.TryParse(KeyInput.Text.Trim(), out var guid))
             {
-                MessageBox.Show("Incorrect UUID");
-                return;
+                var text = Crypter.Encrypt(KeyInput.Text, guid);
+                
+                Encode(text);
+                
+                StatusLabel.Content = "Encrypted with given key";
             }
+            else
+            {
+                StatusLabel.Content = "Invalid key";
+            }
+        }
 
-            // var decryptedText = (BitmapSource) MainImage.Source.Clone();
-            // decryptedText.
-            //
-            // try
-            // {
-            //     TextInput.Text = Crypter.
-            // }
-            // catch (Exception exception)
-            // {
-            //     Console.WriteLine(exception);
-            //     throw;
-            // }
+        private void Encode(string text)
+        {
+            LSB.Encode(bitmap, text);
+            LSB.SetWatermark(bitmap);
+                
+            MainImage.Source = Convert(bitmap);
+            SaveButton.IsEnabled = true;
         }
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = FileFilter
+            };;
             if(saveFileDialog.ShowDialog() == true)
                 bitmap.Save(saveFileDialog.FileName, ImageFormat.Png);
         }

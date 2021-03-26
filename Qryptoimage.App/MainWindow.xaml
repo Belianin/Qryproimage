@@ -37,7 +37,7 @@
                     Click="OpenFileButton_Click">Open</Button>
                 <Label
                     Margin="4 4 4 4">
-                    <TextBlock TextDecorations="Underline" Name="WatermarkLabel">No image selected</TextBlock>
+                    <TextBlock  Name="WatermarkLabel">⚠ No image selected</TextBlock>
                 </Label>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Height="80">
@@ -45,6 +45,8 @@
                     Margin="4 4 4 4"
                     Width="64"
                     Height="24"
+                    IsEnabled="False"
+                    Name="SaveButton"
                     Click="SaveFileButton_Click">Save</Button>
             </StackPanel>
             <StackPanel
@@ -72,11 +74,13 @@
                         Width="80"
                         Height="24"
                         Name="EncryptButton"
+                        IsEnabled="False"
                         Click="Encrypt">Encrypt</Button>
                     <Button
                         Margin="4 4 4 4"
                         Width="80"
                         Height="24"
+                        IsEnabled="False"
                         Name="DecryptButton"
                         Click="Decrypt">Decrypt</Button>
                 </StackPanel>
