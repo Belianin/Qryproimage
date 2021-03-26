@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Qryptoimage
+namespace Qryptoimage.App
 {
     /// <summary>
     /// Interaction logic for App.xaml

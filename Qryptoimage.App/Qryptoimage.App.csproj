@@ -4,12 +4,34 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
-        <AssemblyName>Qryptoimage.App</AssemblyName>
+        <AssemblyName>Qryptoimage</AssemblyName>
         <RootNamespace>Qryptoimage.App</RootNamespace>
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+        <DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Qryptoimage\Qryptoimage.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Qriptoimage.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Qriptoimage.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Qriptoimage.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Qriptoimage.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

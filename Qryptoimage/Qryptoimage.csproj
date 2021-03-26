@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <DebugType>embedded</DebugType>
+        <AssemblyName>Qryptoimage.Domain</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

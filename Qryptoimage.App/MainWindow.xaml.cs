@@ -8,7 +8,7 @@ using Microsoft.Win32;
 using Brushes = System.Windows.Media.Brushes;
 using Image = System.Drawing.Image;
 
-namespace Qryptoimage
+namespace Qryptoimage.App
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
