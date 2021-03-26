@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Text;
 using NUnit.Framework;
 
 namespace Qryptoimage.Tests

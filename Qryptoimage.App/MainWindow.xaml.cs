@@ -38,7 +38,7 @@ namespace Qryptoimage
 
                 if (LSB.CheckWatermark(bitmap))
                 {
-                    WatermarkLabel.Content = "Image has encrypted text*";
+                    WatermarkLabel.Content = "Image may has encrypted text*";
                     WatermarkLabel.Foreground = Brushes.Teal;
                 }
                 else

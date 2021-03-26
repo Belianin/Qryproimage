@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,7 +32,7 @@ namespace Qryptoimage
                 var blue = (int) color.B;
                 if (blue % 2 == 0 && b)
                     blue += 1;
-                else if (blue == 1 && !b) 
+                else if (blue % 2 == 1 && !b) 
                     blue -= 1;
                 
                 decorator[counter] = Color.FromArgb(color.A, color.R, color.G, blue);
