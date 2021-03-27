@@ -54,7 +54,7 @@
                 Margin="4 4 4 4"
                 HorizontalAlignment="Center">
                 <DockPanel 
-                    Width="256">
+                    Width="200">
                     <Label DockPanel.Dock="Left">Enter UUID key or</Label>
                     <Button
                         DockPanel.Dock="Right"
@@ -68,7 +68,7 @@
                     Width="224"
                     Height="28"
                     Name="KeyInput" ></TextBox>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Width="180">
                     <Button
                         Margin="4 4 4 4"
                         Width="80"
